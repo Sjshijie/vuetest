@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <child v-model='lovingVue'></child>
+        {{lovingVue}}
+        <input type="checkbox" v-on:change="add"> nihao
+    </div>
+
+    <script>
+
+        var component = Vue.component('base-checkbox', {
+
+            // props: ['checked'],
+            template: `
+            <div>
+                <input
+                type="checkbox"
+                value='dsfsdf''
+                v-on:change="$emit('input',$event.target.value)"
+                >
+            </div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                lovingVue: [],
+            },
+            components: {
+                'child': component
+            },
+            methods: {
+                add() {
+                    console.log(1)
+                }
+            }
+        })
+
+
+    //     <div id='app'>
+    //     <child :value='lovingVue' @asdsa='add'></child>
+    //     {{lovingVue}}
+    //     <input type="checkbox" v-on:change="add"> nihao
+    // </div>
+
+    // <script>
+
+    //     var component = Vue.component('base-checkbox', {
+
+    //         // props: ['checked'],
+    //         template: `
+    //         <div>
+    //             <input
+    //             type="checkbox"
+    //             value='dsfsdf''
+    //             v-on:change="$emit('asdsa',$event.target.value)"
+    //             >
+    //         </div>
+    //         `
+    //     })
+
+    //     new Vue({
+    //         el: '#app',
+    //         data: {
+    //             lovingVue: [],
+    //         },
+    //         components: {
+    //             'child': component
+    //         },
+    //         methods: {
+    //             add(value) {
+    //                 this.lovingVue=value
+    //             }
+    //         }
+    //     })
+
+
+        //v-model 会默认执行input事件
+        //可以用model更改   详情看文档
+
+
+        // Vue.component('my-checkbox', {
+        //     model: {
+        //         prop: 'checked',
+        //         event: 'change'
+        //     },
+        //     props: {
+        //         // this allows using the `value` prop for a different purpose
+        //         value: String,
+        //         // use `checked` as the prop which take the place of `value`
+        //         checked: {
+        //             type: Number,
+        //             default: 0
+        //         }
+        //     },
+        // })
+    </script>
+</body>
+
+
+
+</html>
