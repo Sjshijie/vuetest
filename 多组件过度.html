@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <title>Document</title>
+
+    <style>
+        #app{
+            margin: 100px
+        }
+        @keyframes bounceInRight{
+            0%{
+                opacity: 0;
+                transform:translateX(10px);
+            }
+            100%{
+                opacity:1;
+                transform:translateX(0px);
+            }
+        }
+
+        @keyframes bounceOutRight{
+            0%{
+                opacity: 1;
+                transform:translateX(0px);
+            }
+            100%{
+                opacity:0;
+                transform:translateX(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <transition enter-active-class="animated bounceInRight"
+        leave-active-class="animated bounceOutRight" mode="out-in">
+        <!-- v-bind:key 是删除元素插入元素 -->
+            <button v-bind:key="docState" @click="docState = 'edited'">  
+                {{ buttonMessage }}
+            </button>
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                docState: 'saved'
+            },
+            computed: {
+                buttonMessage: function () {
+                    switch (this.docState) {
+                        case 'saved': return 'Edit'
+                        case 'edited': return 'Save'
+                        case 'editing': return 'Cancel'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

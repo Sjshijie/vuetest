@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        /* 可以设置不同的进入和离开动画 */
+
+        /* 设置持续时间和动画函数 */
+
+        .slide-fade-enter-active {
+            transition: all 10s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all 10s ease;
+        }
+
+        .slide-fade-enter,
+        .slide-fade-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */
+
+        /* 配置动画开始状态 */
+
+            {
+            transform: translateX(100px);  
+            opacity: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example-1">
+        <button @click="show = !show">
+            Toggle render
+        </button>
+        <transition name="slide-fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#example-1',
+            data: {
+                show: false
+            }
+        })
+    </script>
+</body>
+
+</html>

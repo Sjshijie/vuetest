@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <ee v-model='hello'></ee>
+        {{hello}}
+    </div>
+
+    <script>
+        Vue.component('ee',{
+            props: ['value'],
+            render: function (createElement) {
+              var self = this
+              return createElement('input', {
+                domProps: {
+                  value: self.value
+                },
+                on: {
+                  input: function (event) {
+                    self.$emit('input', event.target.value)
+                  }
+                }
+              })
+            }
+        })
+        new Vue({
+            el: "#app",
+            data:{
+                hello:"world"
+            }
+        })
+    </script>
+</body>
+
+</html>
