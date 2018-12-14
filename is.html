@@ -9,18 +9,126 @@
 </head>
 <body>
     <div id="app">
-        <!-- <component is='child'></component> -->
+        <keep-alive>
+            <component :is='changeComponents'></component>
+        </keep-alive>
+        
+        <button @click="changeComponent">测试生命周期</button>
         <!-- <div is='child'></div> -->
         <!-- <child></child> -->
     </div>
     <script>
         new Vue({
             el:"#app",
+            data:{
+                componentName:'childOne'
+            },
             components:{
-                child:{
+                childOne:{
                     template:`
-                        <div>测试is功能</div>
-                    `
+                        <div>
+                                测试is功能1
+                                {{hello}}
+                                <button @click="add">+1</button>
+                        </div>
+                    `,
+                    data(){
+                        return {
+                            hello:1
+                        }
+                    },
+                    methods:{
+                        add(){
+                            this.hello+=1
+                        }
+                    },
+                    beforeCreate(){
+                        console.log('beforeCreate时触发1')
+                    },
+                    created(){
+                        console.log('created时触发1')
+                    },
+                    beforeMount(){
+                        console.log('beforeMount时触发1')
+                    },
+                    mounted(){
+                        console.log('mounted时触发1')
+                    },
+                    beforeUpdate(){
+                        console.log('beforeUpdate时触发1')
+                    },
+                    updated(){
+                        console.log('updated时触发1')
+                    },
+                    deactivated(){
+                        console.log('deactivated时触发1')
+                    },
+                    beforeDestroy(){
+                        console.log('beforeDestroy时触发1')
+                    },
+                    destroyed(){
+                        console.log('destroyed时触发1')
+                    }
+                },
+                childTwo:{
+                    template:`
+                        <div>
+                                测试is功能2
+                                {{hello}}
+                                <button @click="add">+1</button>
+                        </div>
+                    `,
+                    data(){
+                        return {
+                            hello:2
+                        }
+                    },
+                    methods:{
+                        add(){
+                            this.hello+=1
+                        }
+                    },
+                    beforeCreate(){
+                        console.log('beforeCreate时触发2')
+                    },
+                    created(){
+                        console.log('created时触发2')
+                    },
+                    beforeMount(){
+                        console.log('beforeMount时触发2')
+                    },
+                    mounted(){
+                        console.log('mounted时触发2')
+                    },
+                    beforeUpdate(){
+                        console.log('beforeUpdate时触发2')
+                    },
+                    updated(){
+                        console.log('updated时触发2')
+                    },
+                    deactivated(){
+                        console.log('deactivated时触发2')
+                    },
+                    beforeDestroy(){
+                        console.log('beforeDestroy时触发2')
+                    },
+                    destroyed(){
+                        console.log('destroyed时触发2')
+                    }
+                }
+            },
+            computed:{
+                changeComponents(){
+                    return this.componentName
+                }
+            },
+            methods:{
+                changeComponent(){
+                    if(this.componentName=='childOne'){
+                        this.componentName='childTwo'
+                    }else{
+                        this.componentName='childOne'
+                    }
                 }
             }
         })
