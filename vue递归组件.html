@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <recursion-component :item='item' v-for='item in data' :key='item.title'></recursionComponent>
+    </div>
+
+
+    <template type="text/template" id='recursionComponent'>
+        <div>
+            {{item.title}}
+            <recursion-component :item='item' v-for='item in item.children' :key='item.title'></recursionComponent>
+        </div>
+        
+    </template>
+
+    <script>    
+        var data = [
+            {
+                title:'one',
+                children:[
+                    {title:'one-1'},
+                    {title:'one-2'}
+                ]
+            },
+            {
+                title:'two',
+                children:[
+                    {title:'two-1'},
+                    {title:'two-2'}
+                ]
+            },
+            {
+                title:'three',
+                children:[
+                    {title:'three-1'},
+                    {title:'three-2'}
+                ]
+            }
+        ]    
+
+        new Vue({
+            el:'#app',
+            data:{
+                data:data
+            },
+            components:{
+                'recursionComponent':{
+                    name:'recursionComponent',
+                    template:'#recursionComponent',
+                    props:['item']
+                }
+            }
+        })
+    </script>
+</body>
+</html>
